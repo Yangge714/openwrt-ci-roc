@@ -29,6 +29,6 @@ jobs:
       firmware_tag: AX5-JDCloud-OpenClash
       kernel_file: kernel-6.12
       artifact_prefix: AX5-JDCloud-OpenClash
-      manifest_file: libwrt-qualcommax-ipq60xx.manifest
+      manifest_file: libwrt-qualcommax-ipq60xx-redmi_ax5-jdcloud.manifest
       release_summary: >-
         Redmi AX5 JDCloud 专用精简固件，Linux 6.12、Firewall4、NSS、LuCI 中文界面和 OpenClash；仅构建 redmi,ax5-jdcloud，未包含 PassWall 或无关服务。
