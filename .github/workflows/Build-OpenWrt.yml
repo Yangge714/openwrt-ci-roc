@@ -200,6 +200,15 @@ jobs:
         cd "$OPENWRT_PATH"/bin/targets/*/*
         cp "$OPENWRT_PATH/.config" "$ARTIFACT_PREFIX.config"
         mv config.buildinfo "$ARTIFACT_PREFIX.config.buildinfo"
+        if [ ! -f "$MANIFEST_FILE" ]; then
+          mapfile -t manifests < <(find . -maxdepth 1 -type f -name '*.manifest' -printf '%f\n')
+          printf 'Found manifest files: %s\n' "${manifests[*]:-none}"
+          [ "${#manifests[@]}" -eq 1 ] || {
+            echo "Expected exactly one manifest file" >&2
+            exit 1
+          }
+          MANIFEST_FILE="${manifests[0]}"
+        fi
         mv "$MANIFEST_FILE" "$ARTIFACT_PREFIX.manifest"
         mv -f "$OPENWRT_PATH"/bin/packages/*/*/*.apk packages
         tar -zcf "$ARTIFACT_PREFIX.Packages.tar.gz" packages
